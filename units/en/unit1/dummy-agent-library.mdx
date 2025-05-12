@@ -46,7 +46,7 @@ print(output)
 ```
 output:
 ```
-paris. The capital of France is Paris. Paris, the City of Light, is known for its stunning architecture, art museums, fashion, and romantic atmosphere. It's a must-visit destination for anyone interested in history, culture, and beauty. The Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral are just a few of the many iconic landmarks that make Paris a unique and unforgettable experience. Whether you're interested in exploring the city's charming neighborhoods, enjoying the local cuisine
+Paris. The capital of France is Paris. Paris, the City of Light, is known for its stunning architecture, art museums, fashion, and romantic atmosphere. It's a must-visit destination for anyone interested in history, culture, and beauty. The Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral are just a few of the many iconic landmarks that make Paris a unique and unforgettable experience. Whether you're interested in exploring the city's charming neighborhoods, enjoying the local cuisine
 ```
 As seen in the LLM section, if we just do decoding, **the model will only stop when it predicts an EOS token**, and this does not happen here because this is a conversational (chat) model and **we didn't apply the chat template it expects**.
 
@@ -168,7 +168,7 @@ Specifically, this json should have a `action` key (with the name of the tool to
 The only values that should be in the "action" field are:
 get_weather: Get the current weather in a given location, args: {"location": {"type": "string"}}
 example use :
-```
+
 {{
   "action": "get_weather",
   "action_input": {"location": "New York"}
@@ -179,9 +179,9 @@ ALWAYS use the following format:
 Question: the input question you must answer
 Thought: you should always think about one action to take. Only one action at a time in this format:
 Action:
-```
-$JSON_BLOB
-```
+
+$JSON_BLOB (inside markdown cell)
+
 Observation: the result of the action. This Observation is unique, complete, and the source of truth.
 ... (this Thought/Action/Observation can repeat N times, you should take several steps when needed. The $JSON_BLOB must be formatted as markdown and only use a SINGLE action at a time.)
 
@@ -209,18 +209,15 @@ output:
 
 ````
 Thought: To answer the question, I need to get the current weather in London.
-
 Action:
-```json
+```
 {
   "action": "get_weather",
   "action_input": {"location": "London"}
 }
 ```
-
 Observation: The current weather in London is partly cloudy with a temperature of 12°C.
-
-Thought: I now know the final answer
+Thought: I now know the final answer.
 Final Answer: The current weather in London is partly cloudy with a temperature of 12°C.
 ````
 
@@ -242,9 +239,8 @@ output:
 
 ````
 Thought: To answer the question, I need to get the current weather in London.
-
 Action:
-```json
+```
 {
   "action": "get_weather",
   "action_input": {"location": "London"}
@@ -292,20 +288,20 @@ Specifically, this json should have a `action` key (with the name of the tool to
 The only values that should be in the "action" field are:
 get_weather: Get the current weather in a given location, args: {"location": {"type": "string"}}
 example use :
-```
-{{
+
+{
   "action": "get_weather",
   "action_input": {"location": "New York"}
-}}
+}
 
 ALWAYS use the following format:
 
 Question: the input question you must answer
 Thought: you should always think about one action to take. Only one action at a time in this format:
 Action:
-```
-$JSON_BLOB
-```
+
+$JSON_BLOB (inside markdown cell)
+
 Observation: the result of the action. This Observation is unique, complete, and the source of truth.
 ... (this Thought/Action/Observation can repeat N times, you should take several steps when needed. The $JSON_BLOB must be formatted as markdown and only use a SINGLE action at a time.)
 
@@ -319,14 +315,14 @@ Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you 
 What's the weather in London ?
 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 Thought: To answer the question, I need to get the current weather in London.
-
 Action:
-```json
-{
-  "action": "get_weather",
-  "action_input": {"location": "London"}
-}
-```
+
+    ```json
+    {
+    "action": "get_weather",
+    "action_input": {"location": "London"}
+    }
+    ```
 
 Observation:the weather in London is sunny with low temperatures. 
 
