@@ -46,7 +46,7 @@ print(output)
 ```
 output:
 ```
-Paris. The capital of France is Paris. Paris, the City of Light, is known for its stunning architecture, art museums, fashion, and romantic atmosphere. It's a must-visit destination for anyone interested in history, culture, and beauty. The Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral are just a few of the many iconic landmarks that make Paris a unique and unforgettable experience. Whether you're interested in exploring the city's charming neighborhoods, enjoying the local cuisine
+Paris. The capital of France is Paris. Paris, the City of Light, is known for its stunning architecture, art museums, fashion, and romantic atmosphere. It's a must-visit destination for anyone interested in history, culture, and beauty. The Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral are just a few of the many iconic landmarks that make Paris a unique and unforgettable experience. Whether you're interested in exploring the city's charming neighborhoods, enjoying the local cuisine.
 ```
 As seen in the LLM section, if we just do decoding, **the model will only stop when it predicts an EOS token**, and this does not happen here because this is a conversational (chat) model and **we didn't apply the chat template it expects**.
 
@@ -150,7 +150,7 @@ messages=[
     {"role": "user", "content": "What's the weather in London ?"},
     ]
 from transformers import AutoTokenizer
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-3B-Instruct")
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.3-70B-Instruct")
 
 tokenizer.apply_chat_template(messages, tokenize=False,add_generation_prompt=True)
 ```
